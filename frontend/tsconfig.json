@@ -1,0 +1,41 @@
+{
+  "extends": "./tsconfig.path.json",
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+    "paths": {
+        "@/*": ["./src/*"],
+    } /* Specify a set of entries that re-map imports to additional lookup locations. */,
+    "plugins": [
+        /* Transform paths in output .js files */
+        {
+            "transform": "typescript-transform-paths"
+        },
+        /* Transform paths in output .d.ts files */
+        {
+            "transform": "typescript-transform-paths",
+            "afterDeclarations": true
+        }
+    ]
+  },
+  "include": ["./**/*.d.ts", "./**/*.ts","./**/*.js", "./**/*.tsx","./**/*.jsx"],
+  "exclude": [ "node_modules","build"]
+}
