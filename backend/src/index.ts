@@ -12,8 +12,8 @@ import {apiRoutes,publicRoutes} from '@/routes/index';
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 
-const APP_SERVER_PORT : number = parseInt( String(process.env.APP_SERVER_PORT || 8000) );
-const DB_LOCAL_PORT : number = parseInt( String(process.env.DB_LOCAL_PORT || 27017) );
+const APP_SERVER_PORT : number = parseInt( String(process.env.APP_PORT || 8080) );
+const DB_LOCAL_PORT : number = parseInt( String(process.env.DB_PORT || 27017) );
 
 const server = new ExpressService(APP_SERVER_PORT)
 const database = new DatabaseService(DB_LOCAL_PORT)
@@ -21,7 +21,6 @@ const database = new DatabaseService(DB_LOCAL_PORT)
 // [isValidToken]
     server.setRouter('/api',apiRoutes)
     server.setRouter('/',publicRoutes)
-    
     
     database.start()
     server.start()
