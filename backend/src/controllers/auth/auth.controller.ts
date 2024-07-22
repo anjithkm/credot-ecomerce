@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jsonRes from '@/utils/jsonResponse.util';
 import jwt from 'jsonwebtoken';
+import { LOGIN_PASSWORD } from '@/config/regex.config'
 import { blackList } from '@/var/blackList.var';
 import verifyToken from '@/utils/verifyToken.utils'
 
@@ -106,6 +107,25 @@ export const register = async (req: Request, res: Response) => {
   
   try {
     const { username, password, email } = req.body;
+
+    if(!username || !password || !email){
+
+      const error_code = 400
+      const error_message = `username, password & email are required`
+      const data_payload = null
+  
+      return jsonRes(res,error_code,error_message,data_payload)
+    }
+
+    if(! RegExp(LOGIN_PASSWORD).test(password) ){
+      
+      const error_code = 400
+      const error_message = `The user's password, must be at least 8 characters long, contain at least one number and one alphabet.`
+      const data_payload = null
+  
+      return jsonRes(res,error_code,error_message,data_payload)
+    }
+
     const hashedPassword = await bcrypt.hash(password, 8);
     const user = new User({ username, password: hashedPassword, email });
     await user.save();
