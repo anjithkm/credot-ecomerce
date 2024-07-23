@@ -18,8 +18,7 @@ const DB_LOCAL_PORT : number = parseInt( String(process.env.DB_PORT || 27017) );
 const server = new ExpressService(APP_SERVER_PORT)
 const database = new DatabaseService(DB_LOCAL_PORT)
 
-// [isValidToken]
-    server.setRouter('/api',apiRoutes)
+    server.setRouter('/api',apiRoutes,[isValidToken])
     server.setRouter('/',publicRoutes)
     
     // database.start()
