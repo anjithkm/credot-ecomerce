@@ -22,7 +22,7 @@ const database = new DatabaseService(DB_LOCAL_PORT)
     server.setRouter('/api',apiRoutes)
     server.setRouter('/',publicRoutes)
     
-    database.start()
+    // database.start()
     server.start()
     
     // Global error handling
