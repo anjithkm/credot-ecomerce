@@ -26,14 +26,14 @@ const Product: React.FC = () => {
   const [ memory,setMemory ] = useState<string>("256 GB")
   const [ qty,setQty ] = useState<number>(1)
 
-  useEffect(()=>{
-    const params : params = {
-      pathParams:{
-        productId:productId
-      }
-    };
-    dispatch(getProductByProductID(params))
-  },[productId])
+  // useEffect(()=>{
+  //   const params : params = {
+  //     pathParams:{
+  //       productId:productId
+  //     }
+  //   };
+  //   dispatch(getProductByProductID(params))
+  // },[productId])
 
 
   const HandleAddToCart=()=>{

@@ -21,16 +21,22 @@
   </head>
 
   <script>
-    setTimeout(() => {
+    function onLoad(){
       const collection = document.getElementsByClassName('sc-kYPZxB hEydLL');
+      const login = document.getElementById("operation/login")
+      if(login){
+        let div = login.children[0].children[1]
+        console.log("login div",div)
+      }
       if (collection) {
+        console.log("col",collection[0])
         collection[0].style.display = 'none';
       }
-    }, 250); // Adjust timeout as needed
+      }
   </script>
 
-  <body>
-    <redoc spec-url='dist.json'></redoc>
+  <body onload="onLoad()">
+    <redoc spec-url='/api-docs/dist.json'></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
   </body>
 </html>

@@ -236,6 +236,7 @@
         "description": "Endpoint for user registration. Accepts credentials and returns a unique user id, if the registration is successfull",
         "operationId": "register",
         "parameters": [],
+        "security": [],
         "responses": {
           "200": {
             "description": "Successfull logout",
@@ -328,6 +329,7 @@
         "description": "Endpoint for checking authorization of user.",
         "operationId": "check Authorization",
         "parameters": [],
+        "security": [],
         "responses": {
           "200": {
             "description": "Successfull Authorization",
@@ -386,7 +388,28 @@
               }
             }
           }
+        },
+        "requestBody": {
+          "required": true,
+          "description": "User credentials for login",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  }
+                },
+                "required": [
+                  "token"
+                ]
+              }
+            }
+          }
         }
+        
       }
     },
     "/api/products": {

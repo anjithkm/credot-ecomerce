@@ -28,12 +28,14 @@ const MainRoute: React.FC<any> = () => {
 
   useEffect(()=>{
 
+    console.log("is Auhtenticated",isAuthenticated)
+    console.log("is isAppInitialized",isAppInitialized)
+
     if(isAuthenticated){
 
-      console.log("is Auhtenticated",isAuthenticated)
-      console.log("is isAppInitialized",isAppInitialized)
-
-      if(!isAppInitialized){
+      if(isAppInitialized){
+        navigate(`${auth?.user}/home`)
+      } else {
         const params : params = {
           payloadBody:{
             token: auth.token
@@ -44,18 +46,15 @@ const MainRoute: React.FC<any> = () => {
 
       }
 
-      if(isAppInitialized){
-        navigate(`${auth?.user}/home`)
-      }
+      // window.location.replace(`/${auth?.user}/home`)
 
-     
     }
 
     //  window.history.forward();
 
-    if(!isAuthenticated && location.pathname !== '/auth/login'){
-      navigate("/auth/login")
-    }
+    // if(!isAuthenticated && location.pathname !== '/auth/login'){
+    //   navigate("/auth/login")
+    // }
 
   },[isAuthenticated,auth])
 

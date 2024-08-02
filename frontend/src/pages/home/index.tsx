@@ -12,9 +12,11 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, data ,loading } = useAppSelector(store => store.product);
 
-  useEffect(()=>{
-    dispatch(getProductList())
-  },[])
+  // useEffect(()=>{
+  //   dispatch(getProductList())
+  // },[])
+
+  return(<div>Home</div>)
 
   if(loading){
     return <div>loading...</div>

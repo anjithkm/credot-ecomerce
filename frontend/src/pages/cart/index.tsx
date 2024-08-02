@@ -21,14 +21,14 @@ const Cart: React.FC = () => {
 
   const [cartTotal,seCartTotal]=useState(0)
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    let total=0;
-    cart.forEach((item:any)=>{
-      total = total +  item.totalPrice 
-    })
-    seCartTotal(total)
-  },[cart])
+  //   let total=0;
+  //   cart.forEach((item:any)=>{
+  //     total = total +  item.totalPrice 
+  //   })
+  //   seCartTotal(total)
+  // },[cart])
 
 
   const HandleAddToCart=(selected:any,operation:"+"|"-")=>{
@@ -98,6 +98,10 @@ const Cart: React.FC = () => {
     </div> 
     )
   }
+
+  return(
+    <div>Cart</div>
+  )
 
   if(loading){
     return<div>loading...</div>

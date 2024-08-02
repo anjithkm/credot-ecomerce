@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
 
     }
 
-    const token = jwt.sign({ userId: user?._id.toString(), user:username , host: req?.headers?.host }, process.env.JWT_SECRET! ,{
+    const token = jwt.sign({ userId: user?._id.toString(), user:username , host: req?.headers?.host }, `${process.env.JWT_SECRET}` ,{
       expiresIn: '8h',
     });
 
