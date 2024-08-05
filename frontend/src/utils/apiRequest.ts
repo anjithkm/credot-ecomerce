@@ -31,9 +31,13 @@ async function apiRequest(methode:'POST'|'GET'|'DELETE'|'PUT'|'PATCH',path:strin
     switch(methode){
         
         case 'GET':
+            console.log("Get =========")
             try{
 
                 let response =  await service.get(apiEndPoint);
+
+                console.log("get response",response)
+
                 return response?.data
 
             }catch(error:any){

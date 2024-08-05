@@ -1,21 +1,20 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import ip from "ip";
 import { exec } from 'child_process';
 
 
 class MongoService {
     
-  private PORT: number;
   private INITIAL : boolean;
   private MONGO_URI: String;
   private REPLICA_NAME : String;
   private REPLICA_PORTS : Array<number>
 
 
-  constructor( PORT: number = 27017) {
+  constructor() {
 
     this.INITIAL = true
-    this.MONGO_URI = `mongodb://127.0.0.1:${PORT}/test`
-    this.PORT = PORT;
+    this.MONGO_URI = `${process.env.MONGO_URI}`
     this.REPLICA_NAME = '';
     this.REPLICA_PORTS = [];
 
@@ -32,9 +31,12 @@ class MongoService {
 
     public start(){
 
-        this.connect(this.MONGO_URI)
-
+        // this.connect(`mongodb://192.168.43.51:27017/test`)
+        // this.connect(`mongodb://127.0.0.1:27017/test `)
+        this.connect(`${this.MONGO_URI}`)
+        
         // mongod --dbpath ~/data/db --logpath ~/data/log/mongodb/mongo.log --fork
+        // sudo mongod --port 27017 --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log --fork
 
     }
 

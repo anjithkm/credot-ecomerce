@@ -1,19 +1,20 @@
 import { AuthState } from '@/store/slices/auth'
+import { LOCAL_STORAGE_AUTH } from '@/config/const'
 
 export default function getAuthInitalState(){
 
-  const auth = window.localStorage.getItem("app-auth")
+  const auth = window.localStorage.getItem(LOCAL_STORAGE_AUTH)
 
   if(auth){
 
-    const localStorage = JSON.parse(auth)
+    const auth_JSON = JSON.parse(auth)
 
-    console.log("auth",localStorage)
+    console.log("auth",auth_JSON)
 
     const initialState: AuthState = {
       isAuthenticated: true,
       isAppInitialized: false,
-      auth: localStorage,
+      auth: auth_JSON,
       error: false,
       loading: false,
       errorMessage: {},
@@ -41,7 +42,7 @@ export default function getAuthInitalState(){
       errorMessage: {},
     };
 
-    console.log("empty auth-token",auth)
+    console.log("empty auth",auth)
 
     return initialState
   }

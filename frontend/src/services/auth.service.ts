@@ -1,7 +1,7 @@
 import apiRequest from "../utils/apiRequest";
 import API from "../config/api";
 import { params } from '../utils/apiRequest';
-import { useNavigate } from "react-router-dom";
+import { LOCAL_STORAGE_AUTH } from "@/config/const";
 
 const AuthService = {
 
@@ -19,7 +19,6 @@ const AuthService = {
   },
 
   checkAuthorization: async (params: params = {}) => {
-
 
 
     try {
@@ -50,7 +49,7 @@ const AuthService = {
 
         if(response?.data){
           localStorage.setItem(
-            "app-auth",
+            LOCAL_STORAGE_AUTH,
             auth
           )
         }
@@ -69,7 +68,8 @@ const AuthService = {
       const response = await apiRequest('POST',API.LOGOUT,params);
 
       if(response.success){
-        localStorage.removeItem("app-auth")
+        localStorage.removeItem(LOCAL_STORAGE_AUTH)
+        window.location.href = API.LOGIN;
       }
 
       return response

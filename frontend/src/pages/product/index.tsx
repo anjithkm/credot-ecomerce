@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { params } from '@/utils/apiRequest'
 import { formatePrice } from "@/utils/functions/formate";
 import { camalizeEachWords } from "@/utils/functions/string";
+import { API_BASE_URL } from "@/config/api"
 
 
 const Product: React.FC = () => {
@@ -24,16 +25,22 @@ const Product: React.FC = () => {
 
   const [ color,setColor ] = useState<string>("red")
   const [ memory,setMemory ] = useState<string>("256 GB")
+  const [ displayImg,setDisplayImg ] = useState<number>(0)
   const [ qty,setQty ] = useState<number>(1)
 
-  // useEffect(()=>{
-  //   const params : params = {
-  //     pathParams:{
-  //       productId:productId
-  //     }
-  //   };
-  //   dispatch(getProductByProductID(params))
-  // },[productId])
+
+  useEffect(()=>{
+    const params : params = {
+      pathParams:{
+        productId:productId
+      }
+    };
+    dispatch(getProductByProductID(params))
+  },[productId])
+
+  useEffect(()=>{
+    data && data.length > 0 && setDisplayImg(0) 
+  },[data])
 
 
   const HandleAddToCart=()=>{
@@ -95,24 +102,25 @@ const Product: React.FC = () => {
   return (
     <div >
       {
-        data && (
+        data && data.length > 0 && (
           <div className='product-specific'>
           <div className='product-specific-container'>
             <div className='varient-deatils'>
               <div className='image-section'>
                 <div className='selected-image-container'>
-                    <img className='image' src='/assets/images/iphone.png' alt='iphone' />
+                    <img className='image' src={ data[0]?.images[displayImg] ? `${API_BASE_URL}${data[0]?.images[displayImg]}` : '/assets/images/image-placeholder.jpg' } alt='selected-image' />
                 </div>
                 <div className='multiple-image-container'>
-                    <div className='image-wrapper'>
-                      <img className='image' src='/assets/images/iphone.png' alt='iphone' />
-                    </div>
-                    <div className='image-wrapper'>
-                      <img className='image' src='/assets/images/iphone.png' alt='iphone' />
-                    </div>
-                    <div className='image-wrapper'>
-                      <img className='image' src='/assets/images/iphone.png' alt='iphone' />
-                    </div>
+                  {
+                    data[0].images.map((item:any,index:any)=>{
+                      return(
+                      <div className={`image-wrapper ${index === displayImg ? 'selected' : ''}`} onClick={()=>{setDisplayImg(index)}}>
+                        <img className='image' src={ item ? `${API_BASE_URL}${item}` : '/assets/images/image-placeholder.jpg'} alt={`image-${index}`} />
+                      </div>
+                      )
+                    })
+                  }
+   
                 </div>
               </div>
               <div className='title-section'>
@@ -191,9 +199,7 @@ const Product: React.FC = () => {
           </div>
         </div>
         )
-
       }
-
    </div>
   );
 };

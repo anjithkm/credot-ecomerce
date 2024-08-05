@@ -12,11 +12,10 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const { error, data ,loading } = useAppSelector(store => store.product);
 
-  // useEffect(()=>{
-  //   dispatch(getProductList())
-  // },[])
 
-  return(<div>Home</div>)
+  useEffect(()=>{
+    dispatch(getProductList())
+  },[])
 
   if(loading){
     return <div>loading...</div>
@@ -35,15 +34,36 @@ const Home: React.FC = () => {
           <div className='product-title' >Products</div>
             <div className='horizontal-seperator' style={{marginTop:'22px'}}/>
             {
-              data && (
+              data && data?.items && data?.items?.length > 0 && (
 
-                <div className='product-grid'>
+                <div style={{display:"flex",flexDirection:"row",height:'802px',width:'100%',overflow:'hidden'}}>
+                  <div style={{backgroundColor:'#B9B9B9',padding:'1px 0px 1px 1px',height:'800px',position:'relative'}}>
+                          <Card item={data?.items[0]} key={0} isSmall={false}/>
+                  </div> 
+                  <div className="product-grid" style={{width:'100%',height:'800px'}}>
                   {
-                    data.map( (element:any,index:number) => {
-                      return <Card item={element} key={index} isSmall={index !== 0}/>
+                    data?.items?.map( (element:any,index:number) => {
+                      if(index !== 0){
+                        return <Card item={element} key={index} isSmall={true}/>
+                      }
+                      
                     })
                   }
-          </div>
+                  </div>
+                </div>
+
+                // <div className='product-grid'>
+                //   {
+                //     data?.items?.map( (element:any,index:number) => {
+                //       return <Card item={element} key={index} isSmall={index !== 0}/>
+                //     })
+                //   }
+                //  </div>
+
+              ) || (
+                <div className="empty-container"> 
+                <img style={{width:'400px',height:'100%'}} src='/assets/images/no-product-found.png'></img>
+                </div>
               )
             }
     
@@ -62,8 +82,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-    // "start": "react-scripts start",
-    // "build": "react-scripts build",
-    // "test": "react-scripts test",
-    // "eject": "react-scripts eject"

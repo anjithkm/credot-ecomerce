@@ -10,6 +10,61 @@ const ProductService = {
 
       const response = await apiRequest('GET',API.PRODUCT,params);
 
+    //   const response: any = {
+    //     "success": true,
+    //     "data": {
+    //         "pagination": {
+    //             "page": 1,
+    //             "size": 20,
+    //             "totalItems": 1,
+    //             "totalPages": 1
+    //         },
+    //         "items": [
+    //             {
+    //                 "_id": "66ae4a93dbd9ab276803a8a5",
+    //                 "images": [
+    //                     "/uploads/images/example-product.png"
+    //                 ],
+    //                 "name": "iPhone 14 Pro max",
+    //                 "rating": 0,
+    //                 "Specifications": [
+    //                     "Bluetooth: V5.0"
+    //                 ],
+    //                 "Overview": [
+    //                     null
+    //                 ],
+    //                 "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.",
+    //                 "actualPrice": 5699,
+    //                 "discountedPrice": 4699,
+    //                 "category": "SMART PHONE",
+    //                 "__v": 0
+    //             },
+    //             {
+    //               "_id": "66ae4a93dbd9ab276803a8a5",
+    //               "images": [
+    //                   "/uploads/images/example-product.png"
+    //               ],
+    //               "name": "iPhone 14 Pro max",
+    //               "rating": 0,
+    //               "Specifications": [
+    //                   "Bluetooth: V5.0"
+    //               ],
+    //               "Overview": [
+    //                   null
+    //               ],
+    //               "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.",
+    //               "actualPrice": 5699,
+    //               "discountedPrice": 4699,
+    //               "category": "SMART PHONE",
+    //               "__v": 0
+    //             }
+    //         ]
+    //     },
+    //     "message": "All products data fetched successfully",
+    //     "error": null
+    // }
+
+
       return response
 
     } catch (error) {

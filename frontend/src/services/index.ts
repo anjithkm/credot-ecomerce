@@ -1,6 +1,8 @@
 import axios,{AxiosResponse} from "axios";
+import API from "@/config/api";
+import { LOCAL_STORAGE_AUTH } from "@/config/const";
 
-import { PUBLIC_END_POINTS,API_BASE_URL } from "@/config/api";
+import { API_BASE_URL } from "@/config/api";
 
 const service = axios.create({
   baseURL: API_BASE_URL,
@@ -11,13 +13,15 @@ const service = axios.create({
 service.interceptors.request.use(
 
   (config) => {
+    
     // You can modify the request config here
     // For example, add an Authorization header if needed
-    const localStorage = window.localStorage.getItem('app_auth');
+    const auth = window.localStorage.getItem(LOCAL_STORAGE_AUTH)
 
-    if(localStorage){
-      const auth =  JSON.parse(localStorage)
-      const token = auth?.token
+    if(auth){
+      const auth_JSON = JSON.parse(auth)
+      const token = auth_JSON?.token
+      console.log("token",token)
       config.headers.Authorization = `Bearer ${token}`;
     }
 
@@ -41,8 +45,10 @@ service.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Handle unauthorized errors (e.g., redirect to login)
       console.log('Unauthorized, logging out...');
-      localStorage.removeItem('app-auth');
-      window.location.href = '/auth/login';
+      localStorage.removeItem(LOCAL_STORAGE_AUTH);
+      alert("Something went wrong,please login")
+      // window.location.href = API.LOGIN;
+
     }
 
     return Promise.reject(error);

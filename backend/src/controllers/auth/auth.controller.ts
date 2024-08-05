@@ -156,6 +156,10 @@ export const checkAuthorization = async ( req: Request, res: Response )=>{
 
     const { token } = req.body;
 
+    const header = Object(req.headers);
+
+    console.log("header",header)
+
 
     if (!token){
 

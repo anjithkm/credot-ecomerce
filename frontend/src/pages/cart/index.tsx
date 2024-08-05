@@ -21,14 +21,14 @@ const Cart: React.FC = () => {
 
   const [cartTotal,seCartTotal]=useState(0)
 
-  // useEffect(()=>{
+  useEffect(()=>{
 
-  //   let total=0;
-  //   cart.forEach((item:any)=>{
-  //     total = total +  item.totalPrice 
-  //   })
-  //   seCartTotal(total)
-  // },[cart])
+    let total=0;
+    cart.forEach((item:any)=>{
+      total = total +  item.totalPrice 
+    })
+    seCartTotal(total)
+  },[cart])
 
 
   const HandleAddToCart=(selected:any,operation:"+"|"-")=>{
@@ -61,7 +61,8 @@ const Cart: React.FC = () => {
 
   const HandlePlaceOrder=()=>{
 
-     const params : params = {
+    if(cartTotal !== 0.00 ){
+      const params : params = {
 
         payloadBody:{
           user:auth?.userId,
@@ -72,6 +73,8 @@ const Cart: React.FC = () => {
       };
 
       dispatch(createOrder(params))
+    }
+
 
   }
 
@@ -99,9 +102,9 @@ const Cart: React.FC = () => {
     )
   }
 
-  return(
-    <div>Cart</div>
-  )
+  // return(
+  //   <div>Cart</div>
+  // )
 
   if(loading){
     return<div>loading...</div>
@@ -177,7 +180,7 @@ const Cart: React.FC = () => {
           <span>Total</span>
           <span>INR {formatePrice(cartTotal)}</span>
         </p>
-        <Button className='checkout-button pointer' onClick={HandlePlaceOrder}>PROCEED TO CHECKOUT</Button>
+        <Button   className={`checkout-button ${cartTotal == 0.00 ?'disable':'pointer'} `} onClick={HandlePlaceOrder}>PROCEED TO CHECKOUT</Button>
       </div>
     </div>
     </div>

@@ -10,7 +10,7 @@ export interface OrderState {
 }
 
 export const initialState: OrderState = {
-    data: null,
+    data: [],
     error: false,
     loading: false,
     errorMessage: null,

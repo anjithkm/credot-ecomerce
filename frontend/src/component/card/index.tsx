@@ -17,11 +17,13 @@ const Card: React.FC <SliderProps>= ({isSmall=false,item})=> {
   const [activeSlide, setActiveSlide] = useState(0);
   const navigate = useNavigate()
   const { auth } = useAppSelector(store => store.auth);
+  
 
 
   return(
   <div onClick={()=>{navigate(`/${auth?.user}/product?id=${item._id}`)}} className={`${isSmall?'card-small':'card-big'}`} >
   <div className='badge'><p>HOT</p></div>
+  <div>
   <div className='image-container'>
   <img className='card-image' src={item?.images[0] ? `${API_BASE_URL}${item?.images[0]}` : '/assets/images/image-placeholder.jpg'} alt='iphone' />
   <Button className='rounded card-add-button' icon={<img  src='/assets/icons/add.svg' alt=""/>} />
@@ -30,6 +32,8 @@ const Card: React.FC <SliderProps>= ({isSmall=false,item})=> {
   <p className='card-title'>{item?.name}</p>
   <p className='card-price'> <span className='inr'>INR</span><span className='price'>{formatePrice(item?.discountedPrice)}</span><span className='actual'>{formatePrice(item?.actualPrice)}</span></p>
   <Button className='addtocart-button' >ADD TO CART</Button>
+  </div>
+
   </div>
   )
 }

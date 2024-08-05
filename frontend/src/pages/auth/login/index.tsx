@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
         <div className='login-form-container' style={{display:'flex',flexDirection:'column',margin:'auto auto 0px auto',width:'538px',marginTop:'auto'}}>
          <Input className="login-input"  name="username"
           onFocus={HandleClearError}
-          placeholder="Enter your email address"
+          placeholder="Enter your user name"
           type="text"
           disabled={formik.isSubmitting}
           value={formik.values.username}
@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
           }} />
          <Input className="login-input"  name="password"
           onFocus={HandleClearError}
-          placeholder="Enter your email password"
+          placeholder="Enter your user password"
           type="password"
           disabled={formik.isSubmitting}
           value={formik.values.password}

@@ -1,6 +1,5 @@
-import express, { Application,Express } from 'express';
+import express, { Express } from 'express';
 import cors, { CorsOptions } from 'cors';
-import { setupSwagger } from '@/docs';
 import ExpressRouter from '@/services/router.services';
 import http from 'http';
 import path from 'path';
@@ -10,17 +9,15 @@ class ExpressService {
     
   private app: Express;
   private server: http.Server;
-  private port: number;
+  private port: Number;
   private router : ExpressRouter;
   private initial : boolean;
-  private mongoURI: String;
   private rootDir : String
 
 
-  constructor(port: number) {
+  constructor() {
     this.initial = true
-    this.mongoURI = "mongodb://127.0.0.1:27017"
-    this.port = port;
+    this.port = parseInt( String(process.env.APP_PORT || 8080) ) ;
     this.app = express();
     this.rootDir = process.cwd()
     this.server = http.createServer(this.app);
@@ -37,7 +34,6 @@ class ExpressService {
     // Middleware
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    console.log(process.cwd())
 
     // static files
     this.app.use('/uploads', express.static(path.join(`${this.rootDir}`, 'src','uploads')));
@@ -55,8 +51,6 @@ class ExpressService {
   }
 
   public start(hostname: string = 'localhost'): void {
-
-    // setupSwagger(this.app);
 
     this.server.listen(this.port, () => {
       console.log(`Express service is running on port ${this.port}`); 

@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import dotenv from 'dotenv'
 import path from 'path';
 import CircularJSON from 'circular-json';
@@ -8,15 +9,16 @@ import DatabaseService from '@/services/mongo.service'
 import isValidToken from '@/middleware/token.middleware';
 import {apiRoutes,publicRoutes} from '@/routes/index';
 
-
 // Load environment variables from .env file
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 
-const APP_SERVER_PORT : number = parseInt( String(process.env.APP_PORT || 8080) );
-const DB_LOCAL_PORT : number = parseInt( String(process.env.DB_PORT || 27017) );
+const server = new ExpressService()
+const database = new DatabaseService()
 
-const server = new ExpressService(APP_SERVER_PORT)
-const database = new DatabaseService(DB_LOCAL_PORT)
+console.log(`MONGO_URI = ${process.env.MONGO_URI}`)
+console.log(`APP_PORT = ${process.env.APP_PORT}`)
+console.log(`DB_PORT = ${process.env.DB_PORT}`)
+
 
     server.setRouter('/api',apiRoutes,[isValidToken])
     server.setRouter('/',publicRoutes)

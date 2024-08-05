@@ -1,8 +1,7 @@
 enum ROLES {
   SUPER_ADMIN = "SuperAdmin",
   ADMIN = "Admin",
-  STAFF = 'Staff',
-  EXECUTIVE = 'Executive'
+  USER = 'User',
 }
 
 export default ROLES;

@@ -10,7 +10,7 @@ export interface ProductState {
 }
 
 export const initialState: ProductState = {
-    data: null,
+    data: [],
     error: false,
     loading: false,
     errorMessage: null,
@@ -36,13 +36,15 @@ export const createProduct = createAsyncThunk(
 export const getProductList = createAsyncThunk(
   "Product/getProductByUserId",
   async (_, { rejectWithValue }) => {
-    console.log("product list")
-    try {
-      const response: any = await ProductService.getProductsList();
 
+    try {
+
+      const response: any = await ProductService.getProductsList();
+      
       console.log("product list response",response)
+
       if(response.success){
-        return response?.data?.items
+        return response?.data
       }else{
         return rejectWithValue( response.message || "Something went wrong");
       }
@@ -68,7 +70,7 @@ export const getProductByProductID = createAsyncThunk(
         return rejectWithValue(err.message || "Something went wrong");
         }
     },
-  );
+);
 
 export const updateProductByProductID = createAsyncThunk(
     "Product/updateProductByProductId",
@@ -85,24 +87,24 @@ export const updateProductByProductID = createAsyncThunk(
         return rejectWithValue(err.message || "Something went wrong");
         }
     },
-  );
+);
 
-  export const deleteProductByProductID = createAsyncThunk(
-    "Product/deleteProductByProductId",
-    async (params: any, { rejectWithValue }) => {
-      try {
-        const response: any = await ProductService.DeleteProductById(params);
-        if(response.success){
-          return response.data
-        }else{
-          return rejectWithValue( response.message || "Something went wrong");
-        }
-  
-       } catch (err: any) {
-        return rejectWithValue(err.message || "Something went wrong");
-        }
-    },
-  );
+export const deleteProductByProductID = createAsyncThunk(
+  "Product/deleteProductByProductId",
+  async (params: any, { rejectWithValue }) => {
+    try {
+      const response: any = await ProductService.DeleteProductById(params);
+      if(response.success){
+        return response.data
+      }else{
+        return rejectWithValue( response.message || "Something went wrong");
+      }
+
+      } catch (err: any) {
+      return rejectWithValue(err.message || "Something went wrong");
+      }
+  },
+);
 
 const ProductSlice = createSlice({
   name: "Product",
