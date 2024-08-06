@@ -17,10 +17,10 @@ blackList.subscribeToChanges((blackList:Set<String>) => {
                 blackList.delete(token)
             }
 
-            console.log(`remainingTime ${remainingTime}`,token);
+            // console.log(`remainingTime ${remainingTime}`,token);
 
         }catch(error:any){
-         console.error("blackList subscribeToChanges jwt error:",error)
+            console.error("blackList subscribeToChanges jwt error:",error)
         }
     }
   

@@ -25,6 +25,7 @@ class ExpressService {
     this.configureCors();
   }
 
+  // pm2 start npm --name "server" -- start
 
   public configureCors(corsOptions:CorsOptions = { origin: '*' }): void {
 

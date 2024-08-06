@@ -30,7 +30,9 @@ export function isValidToken(req: Request, res: Response, next: NextFunction) {
     }
 
 
-    if (! verifyToken(req,token) ){
+    const varified = verifyToken(req,token)
+
+    if (! varified){
 
       const error_code = 401
       const error_message = `Token verification failed, authorization denied.`
@@ -39,6 +41,8 @@ export function isValidToken(req: Request, res: Response, next: NextFunction) {
       return jsonRes(res,error_code,error_message,data_payload)
 
     }
+
+    res.locals.varified = varified
 
     next();
 

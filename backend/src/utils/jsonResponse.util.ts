@@ -19,9 +19,9 @@ export default function jsonRes(
   const headers = CircularJSON.stringify(res?.req.headers)
   const error = JSON.stringify(payload)
 
-  if(!success){
-    console.log(`\n \t code: ${code}, \n \t msg:${message} , \n \t error:${error} , \n \t url:${url} , \n \t headers:${headers} , \n \t params:${params}, \n \t query:${query}`)
-  }
+  // if(!success){
+  //   console.log(`\n \t code: ${code}, \n \t msg:${message} , \n \t error:${error} , \n \t url:${url} , \n \t headers:${headers} , \n \t params:${params}, \n \t query:${query}`)
+  // }
 
   return res.status(code).json({
     success: success,

@@ -25,6 +25,7 @@ export const createOrder = async (req: Request, res: Response) => {
 export const getOrders = async (req: Request, res: Response) => {
 
   try {
+    
     // Parse query parameters
     const page: number = parseInt(req.query.page as string) || 1;
     const size: number = parseInt(req.query.size as string) || 10;
@@ -38,7 +39,7 @@ export const getOrders = async (req: Request, res: Response) => {
 
     // Fetch inventory items from MongoDB
     const [items, totalItems] = await Promise.all([
-      Order.find().skip(skip).limit(validSize).exec(),
+      Order.find({user:res.locals.varified.userId}).skip(skip).limit(validSize).exec(),
       Order.countDocuments().exec(),
     ]);
 
@@ -47,7 +48,7 @@ export const getOrders = async (req: Request, res: Response) => {
 
     // Response of successfull
     const success_code = 200;
-    const success_message = 'All products data fetched successfully';
+    const success_message = 'All order data fetched successfully';
     const data_payload = {
       pagination: {
         page: validPage,
