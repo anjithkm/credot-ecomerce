@@ -38,6 +38,7 @@
   "scripts": {
     "start": "craco start --ignore public/",
     "dev": "craco start",
+    "serve": "npm run build && serve -s build",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
