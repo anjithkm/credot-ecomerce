@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkcredot_mechine_test=self.webpackChunkcredot_mechine_test||[]).push([[914],{914:(e,t,r)=>{r.r(t),r.d(t,{default:()=>s});r(43);var n=r(579);const s=e=>{let{type:t}=e;return(0,n.jsx)("div",{style:{minHeight:"100vh"},children:(()=>{switch(t){case 401:return"Unauthorized!";case 403:return"Forbidden";default:return"Page Not Found"}})()})}}}]);
-//# sourceMappingURL=914.745d2ec1.chunk.js.map

@@ -15,11 +15,6 @@ dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
 const server = new ExpressService()
 const database = new DatabaseService()
 
-console.log(`MONGO_URI = ${process.env.MONGO_URI}`)
-console.log(`APP_PORT = ${process.env.APP_PORT}`)
-console.log(`DB_PORT = ${process.env.DB_PORT}`)
-
-
     server.setRouter('/api',apiRoutes,[isValidToken])
     server.setRouter('/',publicRoutes)
     

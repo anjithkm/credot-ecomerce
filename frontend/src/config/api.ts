@@ -1,4 +1,9 @@
-export const API_BASE_URL = "http://localhost:8080"
+export const LOCAL_URL = "http://localhost:8080"
+export const REMOTE_URL = "http://52.172.50.129:8080"
+
+console.log("Frontend NODE_ENV", process.env.NODE_ENV )
+
+export const API_BASE_URL = `${ process.env.NODE_ENV === 'development' ? LOCAL_URL : REMOTE_URL }` 
 
 export enum API {
   LOGIN = "/auth/login",

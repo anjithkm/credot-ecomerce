@@ -13,6 +13,12 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+# Build the application
+RUN npm run build
+
+# Copy the rest of the application code
+COPY . .
+
 # Expose the port that your backend will run on
 EXPOSE 8080
 
