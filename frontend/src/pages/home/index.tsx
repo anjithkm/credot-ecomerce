@@ -36,8 +36,8 @@ const Home: React.FC = () => {
             {
               data && data?.items && data?.items?.length > 0 && (
 
-                <div style={{display:"flex",flexDirection:"row",height:'802px',width:'100%',overflow:'hidden'}}>
-                  <div style={{backgroundColor:'#B9B9B9',padding:'1px 0px 1px 1px',height:'800px',position:'relative'}}>
+                <div className='product-grid-container' >
+                  <div className="product-main" >
                           <Card item={data?.items[0]} key={0} isSmall={false}/>
                   </div> 
                   <div className="product-grid" style={{width:'100%',height:'800px'}}>

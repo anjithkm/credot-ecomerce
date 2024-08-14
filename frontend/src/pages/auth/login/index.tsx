@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
     <div className='login-form'>
      <p className='login-title' style={{}}>Login/Register to your account</p>
      <p className='login-sub-title'>Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas placerat ut sagittionec.</p>
-        <div className='login-form-container' style={{display:'flex',flexDirection:'column',margin:'auto auto 0px auto',width:'538px',marginTop:'auto'}}>
+        <div className='login-form-container' >
          <Input className="login-input"  name="username"
           onFocus={HandleClearError}
           placeholder="Enter your user name"

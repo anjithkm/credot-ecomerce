@@ -116,7 +116,7 @@ const Cart: React.FC = () => {
       <p className='cart-title'>Cart</p>
     </div>
     <div className='cart-container' >
-      <div className='' style={{flexGrow: 1 }}>
+      <div className='cart-table' >
 
         <div className='table-header'>
           <p className='product-col'>PRODUCT</p>

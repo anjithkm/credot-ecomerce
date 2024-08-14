@@ -1,13 +1,13 @@
-import React, { useState, ComponentProps,ReactElement } from "react";
+import React, { ComponentProps } from "react";
 
 interface InputProps extends ComponentProps<any>{
-error?:string
+error?:string,
 }
 
 const Input:React.FC<InputProps>=({error,...props})=>{
   
     return (
-        <div>
+        <div >
             <input {...props} >
 
             </input>
