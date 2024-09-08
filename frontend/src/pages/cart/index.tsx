@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Button } from "@/component/button";
 import { useNavigate } from "react-router-dom";
@@ -91,7 +92,7 @@ const Cart: React.FC = () => {
   if(data&& data?.orderId){
     setTimeout(()=>{
      dispatch(clearData())
-     navigate(`/${auth?.user}/home`)
+//     navigate(`/${auth?.user}/home`)
     },3000)
     return(
       <div className='success-order' style={{display:'flex',width:'100%',height:'100vh',backgroundColor:'#F9F9F9'}}>
