@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { params } from '@/utils/apiRequest'
 import { formatePrice } from "@/utils/functions/formate";
 import { camalizeEachWords } from "@/utils/functions/string";
+import { getAllOrders } from '@/store/slices/order';
 import { API_BASE_URL } from "@/config/api"
 
 
@@ -22,12 +23,17 @@ const Product: React.FC = () => {
 
   const productId = query.get('id') || ''
   const { error,data,loading } = useAppSelector(store => store.product);
+  const { data:orderData } = useAppSelector((store:any) => store.order);
 
   const [ color,setColor ] = useState<string>("red")
   const [ memory,setMemory ] = useState<string>("256 GB")
   const [ displayImg,setDisplayImg ] = useState<number>(0)
   const [ qty,setQty ] = useState<number>(1)
 
+
+  useEffect(()=>{
+    dispatch(getAllOrders())
+  },[])
 
   useEffect(()=>{
     const params : params = {
@@ -46,7 +52,7 @@ const Product: React.FC = () => {
 
   const HandleAddToCart=()=>{
 
-    let temp = cart
+    let temp = [ cart, ...orderData ]
 
     let unselected =  temp.filter((item)=>item.productId !== data[0]._id)
     let selected = temp.filter((item)=>item.productId === data[0]._id)

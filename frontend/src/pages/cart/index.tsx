@@ -19,12 +19,10 @@ const Cart: React.FC = () => {
 
   const [cartTotal,setCartTotal]=useState(0)
 
-
   useEffect(()=>{
-    dispatch(getAllOrders())
-  },[])
-
-  useEffect(()=>{
+    if(cart.length == 0){
+      dispatch(getAllOrders())
+    }
     let total=0;
     cart.forEach((item:any)=>{
       total = total +  item.totalPrice 
@@ -125,7 +123,6 @@ const Cart: React.FC = () => {
   if(data&& data?.orderId){
     setTimeout(()=>{
       dispatch(clearData())
-      dispatch(getAllOrders())
     },3000)
 
     return(
