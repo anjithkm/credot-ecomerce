@@ -1,5 +1,4 @@
 import mongoose, { ConnectOptions } from 'mongoose';
-import { exec } from 'child_process';
 
 
 class MongoService {
@@ -29,7 +28,7 @@ class MongoService {
     }
 
     public start(){
-
+        console.log("Mongo URI=",this.MONGO_URI)
         this.connect(`${this.MONGO_URI}`)
         // mongod --dbpath ~/data/db --logpath ~/data/log/mongodb/mongo.log --fork
         // sudo mongod --port 27017 --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log --fork
