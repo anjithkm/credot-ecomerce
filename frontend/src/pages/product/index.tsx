@@ -52,7 +52,7 @@ const Product: React.FC = () => {
 
   const HandleAddToCart=()=>{
 
-    let temp = [ ...cart, ...orderData ]
+    let temp = cart.concat(orderData);
 
     let unselected =  temp.filter((item)=>item.productId !== data[0]._id)
     let selected = temp.filter((item)=>item.productId === data[0]._id)
