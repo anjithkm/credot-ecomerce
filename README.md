@@ -30,11 +30,14 @@ This is a Node.js project using the Express framework, with MongoDB for database
 Create a .env file in the root directory of backend file and add the following configuration:
 
    APP_PORT=8080
-   DB_PORT=27017
-   MONGODB_URI=mongodb://localhost:27017/test
+   DB_PORT=27017 
+   MONGO_LOCAL_URI = mongodb://<your localhost IP address>/test
+   MONGO_REMOTE_URI = mongodb://<your cloud server local IP address>:27017/test
    JWT_SECRET=SECRET-KEY-API-V2.00
+   NODE_ENV=development
 
 here test is the name of your MongoDB database.
+set NODE_ENV=development for development and NODE_ENV=production for production
 
 ## Running the Project
 
