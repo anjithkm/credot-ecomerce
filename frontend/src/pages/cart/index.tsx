@@ -18,7 +18,6 @@ const Cart: React.FC = () => {
   const { cart } = useAppSelector((store:any) => store.cart);
   const { auth } = useAppSelector((store:any) => store.auth);
   const { error,data,loading } = useAppSelector((store:any) => store.order);
-  // const [ orders,setCart ] = useState()
 
 
   const [cartTotal,setCartTotal]=useState(0)
@@ -91,9 +90,10 @@ const Cart: React.FC = () => {
 
   if(data&& data?.orderId){
     setTimeout(()=>{
-     dispatch(clearData())
-//     navigate(`/${auth?.user}/home`)
+      dispatch(getAllOrders())
+     //   navigate(`/${auth?.user}/home`)
     },3000)
+
     return(
       <div className='success-order' style={{display:'flex',width:'100%',height:'100vh',backgroundColor:'#F9F9F9'}}>
       <div className='message-continer' style={{margin:'auto',display:'flex',flexDirection:'column',width:'100%'}}>
@@ -107,6 +107,7 @@ const Cart: React.FC = () => {
       </div>
     </div> 
     )
+
   }
 
   // return(
