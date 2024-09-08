@@ -33,8 +33,28 @@ const Cart: React.FC = () => {
   },[cart])
 
   useEffect(()=>{
+
     if(data?.items){
-      dispatch(setCart(data?.items[0]?.products))
+
+      let temp = data?.items[0]?.products
+
+      let unselected =  temp.filter((item:any)=>item.productId !== cart[0].productId)
+      let selected = temp.filter((item:any)=>item.productId === cart[0].productId)
+      //  varients: { color: selected[0].color , memory: selected[0].memory },
+
+      if( selected.length > 0 ){
+        dispatch(setCart([...unselected,
+          {
+            ...selected[0],
+            quantity: selected[0].quantity + cart[0].quantity,
+            totalPrice: Math.round( ( (selected[0].quantity + cart[0].quantity) * cart[0]?.discountedPrice) * 100) / 100 
+          }
+        ]))
+
+      }else{
+        dispatch(setCart([ ...cart, ...data?.items[0]?.products]))
+      }
+
     }
   console.log("order data",data)
   },[data])
