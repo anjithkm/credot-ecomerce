@@ -40,6 +40,7 @@ const Product: React.FC = () => {
 
   useEffect(()=>{
     data && data.length > 0 && setDisplayImg(0) 
+    console.log("Product data:",data[0])
   },[data])
 
 
