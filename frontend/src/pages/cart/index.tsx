@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/component/button";
   
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { setCart } from '@/store/slices/cart';
-import { createOrder,clearData,getAllOrders } from '@/store/slices/order';
+import { setCart,clearData} from '@/store/slices/cart';
+import { createOrder,getAllOrders } from '@/store/slices/order';
 import { formatePrice } from "@/utils/functions/formate";
 import { params } from '@/utils/apiRequest'
 import { API_BASE_URL } from "@/config/api"
@@ -34,36 +34,38 @@ const Cart: React.FC = () => {
 
   useEffect(()=>{
 
-    if(data && data?.items){
+    if( cart.length == 0 && data && data?.items){
 
-      let temp = data?.items[0]?.products
+      dispatch(setCart(data?.items[0]?.products))
 
-      if(cart && cart.length > 0 ){
+      // let temp = data?.items[0]?.products
 
-        let unselected =  temp.filter((item:any)=>item.productId !== cart[0].productId)
-        let selected = temp.filter((item:any)=>item.productId === cart[0].productId)
-        //  varients: { color: selected[0].color , memory: selected[0].memory },
+      // if(cart && cart.length > 0 ){
+
+      //   let unselected =  temp.filter((item:any)=>item.productId !== cart[0].productId)
+      //   let selected = temp.filter((item:any)=>item.productId === cart[0].productId)
+      //   //  varients: { color: selected[0].color , memory: selected[0].memory },
   
-        if( selected.length > 0 ){
-          dispatch(setCart([...unselected,
-            {
-              ...selected[0],
-              quantity: selected[0].quantity + cart[0].quantity,
-              totalPrice: Math.round( ( (selected[0].quantity + cart[0].quantity) * cart[0]?.discountedPrice) * 100) / 100 
-            }
-          ]))
+      //   if( selected.length > 0 ){
+      //     dispatch(setCart([...unselected,
+      //       {
+      //         ...selected[0],
+      //         quantity: selected[0].quantity + cart[0].quantity,
+      //         totalPrice: Math.round( ( (selected[0].quantity + cart[0].quantity) * cart[0]?.discountedPrice) * 100) / 100 
+      //       }
+      //     ]))
   
-        }else{
-          dispatch(setCart([ ...cart, ...temp]))
-        }
+      //   }else{
+      //     dispatch(setCart([ ...cart, ...temp]))
+      //   }
 
-      }else{
-        dispatch(setCart(temp))
-      }
+      // }else{
+      //   dispatch(setCart(temp))
+      // }
 
     }
 
-  console.log("order data",data)
+    console.log("order data",data)
 
   },[data])
 
@@ -122,6 +124,7 @@ const Cart: React.FC = () => {
 
   if(data&& data?.orderId){
     setTimeout(()=>{
+      dispatch(clearData())
       dispatch(getAllOrders())
     },3000)
 
