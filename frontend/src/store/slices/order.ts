@@ -37,7 +37,7 @@ export const getAllOrders = createAsyncThunk(
   "order/getAllOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const response: any = await OrderService.getOrderByUser();
+      const response: any = await OrderService.getAllOrderByUser();
       if(response.success){
         return response.data
       }else{

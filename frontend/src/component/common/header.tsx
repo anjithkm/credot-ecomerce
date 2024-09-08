@@ -19,7 +19,7 @@ const Header : React.FC = () => {
     return (
      <header className="header">
       <div className='header-container'>
-        <img className='logo' src='/assets/images/logo.png'/>
+        <img className='logo' src='/assets/images/logo.png' onClick={()=>{navigate(`/${auth?.user}/home`)}} />
         <div className='header-extra'>
           <Button title="Profile" className='rounded header-button' icon={<img  src='/assets/icons/user.svg' alt=""/>} />
            <div className='vertical-seperator header-extra-seperator-margin'/>

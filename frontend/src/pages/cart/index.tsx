@@ -91,7 +91,6 @@ const Cart: React.FC = () => {
   if(data&& data?.orderId){
     setTimeout(()=>{
       dispatch(getAllOrders())
-     //   navigate(`/${auth?.user}/home`)
     },3000)
 
     return(

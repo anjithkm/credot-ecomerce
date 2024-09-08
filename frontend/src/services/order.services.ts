@@ -4,11 +4,11 @@ import { params } from '../utils/apiRequest'
 
 const OrderService = {
 
-  getOrderByUser: async (params: params = {}) => {
+  getAllOrderByUser: async (params: params = {}) => {
 
     try {
 
-      const response = await apiRequest('POST',API.ORDER_BY_USER_ID,params);
+      const response = await apiRequest('POST',API.ORDER,params);
 
       return response
 
