@@ -8,7 +8,7 @@ const OrderService = {
 
     try {
 
-      const response = await apiRequest('POST',API.ORDER,params);
+      const response = await apiRequest('GET',API.ORDER,params);
 
       return response
 
