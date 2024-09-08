@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
   
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCart } from '@/store/slices/cart';
-import { createOrder } from '@/store/slices/order';
+import { createOrder,clearData } from '@/store/slices/order';
 import { formatePrice } from "@/utils/functions/formate";
 import { params } from '@/utils/apiRequest'
 import { API_BASE_URL } from "@/config/api"
@@ -19,7 +19,7 @@ const Cart: React.FC = () => {
   const { error,data,loading } = useAppSelector((store:any) => store.order);
 
 
-  const [cartTotal,seCartTotal]=useState(0)
+  const [cartTotal,setCartTotal]=useState(0)
 
   useEffect(()=>{
 
@@ -27,7 +27,7 @@ const Cart: React.FC = () => {
     cart.forEach((item:any)=>{
       total = total +  item.totalPrice 
     })
-    seCartTotal(total)
+    setCartTotal(total)
   },[cart])
 
 
@@ -85,6 +85,7 @@ const Cart: React.FC = () => {
 
   if(data&& data.orderId){
     setTimeout(()=>{
+     dispatch(clearData())
      navigate(`/${auth?.user}/home`)
     },3000)
     return(
@@ -115,7 +116,7 @@ const Cart: React.FC = () => {
       <div className='cart'>
       <p className='cart-title'>Cart</p>
     </div>
-    <div className='cart-container' >
+    <div className='cart-container'>
       <div className='cart-table' >
 
         <div className='table-header'>
