@@ -15,11 +15,11 @@
   },
   "servers": [
     {
-      "url": "https://production.com",
+      "url": "https://< domain >",
       "description": "Production server"
     },
     {
-      "url": "https://development.com",
+      "url": "http://35.244.6.150:8080",
       "description": "Development server"
     },
     {
