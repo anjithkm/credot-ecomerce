@@ -1,5 +1,5 @@
 export const LOCAL_URL = "http://localhost:8080"
-export const REMOTE_URL = "http://52.172.50.129:8080"
+export const REMOTE_URL = "http://35.244.6.150:8080"
 
 console.log("Frontend NODE_ENV", process.env.NODE_ENV )
 
