@@ -1,5 +1,5 @@
 import mongoose, { ConnectOptions } from 'mongoose';
-
+import { exec } from 'child_process';
 
 
 class MongoService {
@@ -13,7 +13,7 @@ class MongoService {
   constructor() {
 
     this.INITIAL = true
-    this.MONGO_URI = `${ process.env.MONGO_LOCAL_URI }`
+    this.MONGO_URI = `${ process.env.NODE_ENV === 'development' ? process.env.MONGO_LOCAL_URI : process.env.MONGO_REMOTE_URI }`
     this.REPLICA_NAME = '';
     this.REPLICA_PORTS = [];
 
