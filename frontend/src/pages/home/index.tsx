@@ -1,8 +1,8 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect} from "react";
 import Slider from "@/component/carousel";
 import Card from "@/component/card";
 
-import {  getProductList,clearError} from '@/store/slices/product';
+import {  getProductList } from '@/store/slices/product';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 
@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 const Home: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const { error, data ,loading } = useAppSelector(store => store.product);
+  const { data ,loading } = useAppSelector(store => store.product);
 
 
   useEffect(()=>{
@@ -34,35 +34,30 @@ const Home: React.FC = () => {
           <div className='product-title' >Products</div>
             <div className='horizontal-seperator' style={{marginTop:'22px'}}/>
             {
-              data && data?.items && data?.items?.length > 0 && (
+              data ? ( data?.items && ( data?.items?.length > 0 ) ) && (
 
                 <div className='product-grid-container' >
                   <div className="product-main" >
                           <Card item={data?.items[0]} key={0} isSmall={false}/>
                   </div> 
-                  <div className="product-grid" style={{width:'100%',height:'800px'}}>
+                  <div className="product-grid">
                   {
                     data?.items?.map( (element:any,index:number) => {
+
                       if(index !== 0){
                         return <Card item={element} key={index} isSmall={true}/>
                       }
+
+                      return null
                       
                     })
                   }
                   </div>
                 </div>
 
-                // <div className='product-grid'>
-                //   {
-                //     data?.items?.map( (element:any,index:number) => {
-                //       return <Card item={element} key={index} isSmall={index !== 0}/>
-                //     })
-                //   }
-                //  </div>
-
-              ) || (
+              ) : (
                 <div className="empty-container"> 
-                <img style={{width:'400px',height:'100%'}} src='/assets/images/no-product-found.png'></img>
+                <img style={{width:'400px',height:'100%'}} src='/assets/images/no-product-found.png' alt=""></img>
                 </div>
               )
             }

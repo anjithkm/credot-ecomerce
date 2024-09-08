@@ -117,6 +117,16 @@ export const register = async (req: Request, res: Response) => {
       return jsonRes(res,error_code,error_message,data_payload)
     }
 
+    const exist_user = User.findOne({username:username})
+
+    if(exist_user !== null){
+      const error_code = 400
+      const error_message = `username exist,try another name`
+      const data_payload = null
+  
+      return jsonRes(res,error_code,error_message,data_payload)
+    }
+
     if(! RegExp(LOGIN_PASSWORD).test(password) ){
       
       const error_code = 400
