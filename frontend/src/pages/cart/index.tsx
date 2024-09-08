@@ -17,9 +17,11 @@ const Cart: React.FC = () => {
   const { auth } = useAppSelector((store:any) => store.auth);
   const { error,data,loading } = useAppSelector((store:any) => store.order);
 
-  const [cartTotal,setCartTotal]=useState(0)
+  const [cartTotal,setCartTotal]=useState(0);
+  const [orderSucess,setOrderSucess]=useState(false);
 
   useEffect(()=>{
+
     if(cart.length == 0){
       dispatch(getAllOrders())
     }
@@ -27,40 +29,22 @@ const Cart: React.FC = () => {
     cart.forEach((item:any)=>{
       total = total +  item.totalPrice 
     })
-    setCartTotal(total)
+    
+    setCartTotal(total);
+
   },[cart])
 
   useEffect(()=>{
 
-    if( cart.length == 0 && data && data?.items){
-
+    if( cart.length == 0 && data && data?.items ){
       dispatch(setCart(data?.items[0]?.products))
+    }
 
-      // let temp = data?.items[0]?.products
-
-      // if(cart && cart.length > 0 ){
-
-      //   let unselected =  temp.filter((item:any)=>item.productId !== cart[0].productId)
-      //   let selected = temp.filter((item:any)=>item.productId === cart[0].productId)
-      //   //  varients: { color: selected[0].color , memory: selected[0].memory },
-  
-      //   if( selected.length > 0 ){
-      //     dispatch(setCart([...unselected,
-      //       {
-      //         ...selected[0],
-      //         quantity: selected[0].quantity + cart[0].quantity,
-      //         totalPrice: Math.round( ( (selected[0].quantity + cart[0].quantity) * cart[0]?.discountedPrice) * 100) / 100 
-      //       }
-      //     ]))
-  
-      //   }else{
-      //     dispatch(setCart([ ...cart, ...temp]))
-      //   }
-
-      // }else{
-      //   dispatch(setCart(temp))
-      // }
-
+    if(data&& data?.orderId){
+      setOrderSucess(true)
+      setTimeout(()=>{
+        setOrderSucess(false)
+      },3000)
     }
 
     console.log("order data",data)
@@ -108,7 +92,7 @@ const Cart: React.FC = () => {
         }
 
       };
-
+      dispatch(setCart([]))
       dispatch(createOrder(params))
     }
 
@@ -120,10 +104,7 @@ const Cart: React.FC = () => {
     dispatch(setCart([...unselected]))
   }
 
-  if(data&& data?.orderId){
-    setTimeout(()=>{
-      dispatch(clearData())
-    },3000)
+  if(orderSucess){
 
     return(
       <div className='success-order' style={{display:'flex',width:'100%',height:'100vh',backgroundColor:'#F9F9F9'}}>

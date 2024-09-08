@@ -44,6 +44,11 @@ const Product: React.FC = () => {
     dispatch(getProductByProductID(params))
   },[productId])
 
+
+  useEffect(()=>{
+    console.log("orderData:",orderData)
+  },[orderData])
+
   useEffect(()=>{
     data && data.length > 0 && setDisplayImg(0) 
     console.log("Product data:",data[0])
@@ -52,7 +57,7 @@ const Product: React.FC = () => {
 
   const HandleAddToCart=()=>{
 
-    let temp = cart.concat(orderData);
+    let temp = cart.concat(orderData?.items);
 
     let unselected =  temp.filter((item)=>item.productId !== data[0]._id)
     let selected = temp.filter((item)=>item.productId === data[0]._id)
