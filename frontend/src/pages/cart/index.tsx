@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Button } from "@/component/button";
-import { useNavigate } from "react-router-dom";
   
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCart } from '@/store/slices/cart';
@@ -14,11 +13,9 @@ import { API_BASE_URL } from "@/config/api"
 const Cart: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
   const { cart } = useAppSelector((store:any) => store.cart);
   const { auth } = useAppSelector((store:any) => store.auth);
   const { error,data,loading } = useAppSelector((store:any) => store.order);
-
 
   const [cartTotal,setCartTotal]=useState(0)
 
@@ -32,6 +29,9 @@ const Cart: React.FC = () => {
   },[cart])
 
   useEffect(()=>{
+    if(data?.items){
+      dispatch(setCart(data?.items[0]?.products))
+    }
   console.log("order data",data)
   },[data])
 
