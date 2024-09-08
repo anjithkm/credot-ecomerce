@@ -4,8 +4,17 @@ import jsonRes from '@/utils/jsonResponse.util';
 
 export const createOrder = async (req: Request, res: Response) => {
   try {
-    const order = new Order(req.body);
-    await order.save();
+
+    let order = await Order.findOneAndReplace({user:res.locals.varified.userId}, req.body, {
+      new: true,
+    });
+
+    if (!order) {
+      order = new Order(req.body);
+      await order.save();
+    }
+    
+
     const success_code = 200;
     const success_message = `Data created successfully`;
     const data_payload = {
@@ -164,6 +173,27 @@ export const deleteOrder = async (req: Request, res: Response) => {
     const success_message = `Data deleted successfully`;
     const data_payload = {
       orderId:order?._id
+    };
+
+    return jsonRes(res, success_code, success_message, data_payload);
+  } catch (error) {
+    const error_code = 500;
+    const error_message = `Something went wrong,Try again`;
+    const data_payload = error;
+
+    return jsonRes(res, error_code, error_message, data_payload);
+  }
+};
+
+export const deleteAllOrder = async (req: Request, res: Response) => {
+  try {
+
+    await Order.deleteMany({user:res.locals.varified.userId});
+
+    const success_code = 200;
+    const success_message = `Data deleted successfully`;
+    const data_payload = {
+      orderId: null
     };
 
     return jsonRes(res, success_code, success_message, data_payload);

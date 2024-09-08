@@ -33,15 +33,15 @@ export const createOrder = createAsyncThunk(
     },
 );
 
-export const getOrderByUserID = createAsyncThunk(
-  "order/getOrderByUserId",
-  async (params: any, { rejectWithValue }) => {
+export const getAllOrders = createAsyncThunk(
+  "order/getAllOrders",
+  async (_, { rejectWithValue }) => {
     try {
-      const response: any = await OrderService.getOrderByUser(params);
+      const response: any = await OrderService.getOrderByUser();
       if(response.success){
         return response.data
       }else{
-        return rejectWithValue( response.message || "Something went wrong");
+        return rejectWithValue(response.message || "Something went wrong");
       }
 
      } catch (err: any) {
@@ -110,14 +110,14 @@ const orderSlice = createSlice({
         state.loading = false;
         state.errorMessage = action.payload;
     });
-    builder.addCase(getOrderByUserID.pending, (state) => {
+    builder.addCase(getAllOrders.pending, (state) => {
         state.loading = true;
     });
-    builder.addCase(getOrderByUserID.fulfilled, (state, action) => {
+    builder.addCase(getAllOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
     });
-    builder.addCase(getOrderByUserID.rejected, (state, action) => {
+    builder.addCase(getAllOrders.rejected, (state, action) => {
         state.data = null;
         state.error = true;
         state.loading = false;

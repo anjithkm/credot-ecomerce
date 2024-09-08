@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
   
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setCart } from '@/store/slices/cart';
-import { createOrder,clearData } from '@/store/slices/order';
+import { createOrder,clearData,getAllOrders } from '@/store/slices/order';
 import { formatePrice } from "@/utils/functions/formate";
 import { params } from '@/utils/apiRequest'
 import { API_BASE_URL } from "@/config/api"
@@ -17,18 +17,23 @@ const Cart: React.FC = () => {
   const { cart } = useAppSelector((store:any) => store.cart);
   const { auth } = useAppSelector((store:any) => store.auth);
   const { error,data,loading } = useAppSelector((store:any) => store.order);
+  // const [ orders,setCart ] = useState()
 
 
   const [cartTotal,setCartTotal]=useState(0)
 
   useEffect(()=>{
-
+    dispatch(getAllOrders())
     let total=0;
     cart.forEach((item:any)=>{
       total = total +  item.totalPrice 
     })
     setCartTotal(total)
   },[cart])
+
+  useEffect(()=>{
+  console.log("order data",data)
+  },[data])
 
 
   const HandleAddToCart=(selected:any,operation:"+"|"-")=>{
@@ -83,7 +88,7 @@ const Cart: React.FC = () => {
     dispatch(setCart([...unselected]))
   }
 
-  if(data&& data.orderId){
+  if(data&& data?.orderId){
     setTimeout(()=>{
      dispatch(clearData())
      navigate(`/${auth?.user}/home`)
