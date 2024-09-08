@@ -19,8 +19,12 @@ const Cart: React.FC = () => {
 
   const [cartTotal,setCartTotal]=useState(0)
 
+
   useEffect(()=>{
     dispatch(getAllOrders())
+  },[])
+
+  useEffect(()=>{
     let total=0;
     cart.forEach((item:any)=>{
       total = total +  item.totalPrice 
