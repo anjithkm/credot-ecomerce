@@ -12,6 +12,7 @@ This is a Node.js project using the Express framework, with MongoDB for database
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Running the Project](#running-the-project)
+- [Access](#Access-the-project)
 
 
 Dockerized MongoDB Project
@@ -56,10 +57,14 @@ also edit frontend --> src --> config ---> api.ts with REMOTE_URL = "http://<you
 
 ## Running the Project
 
-```
-docker  compose build
-docker compose up -d
-```
+   ```bash
+   docker  compose build
+   docker compose up -d
+   ```
+
+## Access
+
+ You can acesss frontend through http://<your privet ip address>:3000/auth/login and backend through http://<your privet ip address>:8080
 
 # Without docker 
 
@@ -74,9 +79,11 @@ docker compose up -d
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd <repository-directory>
+   ```
    
 
 2. Install dependencies
@@ -87,12 +94,14 @@ docker compose up -d
 
 Create a .env file in the root directory of backend file and add the following configuration:
 
+   ```bash
    APP_PORT=8080
    DB_PORT=27017 
    MONGO_LOCAL_URI = mongodb://<your privet iP address>/test
    MONGO_REMOTE_URI = mongodb://<your privet iP address>:27017/test
    JWT_SECRET=SECRET-KEY-API-V2.00
    NODE_ENV=development
+   ```
 
 here test is the name of your MongoDB database.
 set NODE_ENV=development for development and NODE_ENV=production for production
@@ -112,7 +121,7 @@ To start the server in development mode, run:
 ## Table of Contents
 
 - [API](#api-documentation)
-- [Database Access](#database-access)
+- [Access](#project-access)
 
 
 ## API 
@@ -121,6 +130,8 @@ The OpenAPI documentation for the API can be accessed at:
 
    http://localhost:8080/api-docs
 
-## Database Access
+## Access
 
 This project uses MongoDB as the database. The default MongoDB port is 27017.
+
+You can acesss frontend through http://<your privet ip address>:3000/auth/login and backend through http://<your privet ip address>:8080
