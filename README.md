@@ -1,6 +1,6 @@
 # credot-ecomerce
 
-# Node.js Express Project
+# MERN Project with Docker
 
 This is a Node.js project using the Express framework, with MongoDB for database access and OpenAPI for API documentation.
 
@@ -17,11 +17,12 @@ This is a Node.js project using the Express framework, with MongoDB for database
 Dockerized MongoDB Project
 This repository contains a Dockerized project that sets up a MongoDB database using the official MongoDB Community Server image. The setup includes Docker Compose for easier container management and environment variables for MongoDB connection.
 
-##Prerequisites
+## Prerequisites
 Before you begin, ensure you have the following installed on your machine:
 
 Docker
 Docker Compose
+
 MongoDB Setup
 The MongoDB container is set up using the official MongoDB Community Server image (mongodb/mongodb-community-server:5.0.8-ubuntu2004). This image is based on Ubuntu 20.04 and runs MongoDB 5.0.8.
 
@@ -109,10 +110,7 @@ To start the server in development mode, run:
 
 
 ## Table of Contents
-- [Prerequisites](#Prerequisites for dockerization)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Running the Project](#running-the-project)
+
 - [API](#api-documentation)
 - [Database Access](#database-access)
 
